@@ -1,74 +1,36 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
-{% block title %}登录{% endblock %}
+{% block title %}课程信息管理{% endblock %}
 {% block css %}
-<style>
-    .icon {
-        margin: 0 5px;
-    }
-    .center { margin: auto;
-
-    width: 85%;
-
-    padding: 10px; }
-
-    .middle {
- 
-        float: none;
-      
-        display: inline-block;
-      
-        vertical-align: middle;
-      
-     }
-</style>
-
 {% endblock %}
-  
-
 {% block content %}
 <div class="container">
-    <div class="row">
-        <div class="row col-sm-2 middle">
-            <label class="control-label "><h3>&nbsp&nbsp当前比赛名称:</h3></label>
-        </div>
-        <div class="row col-sm-4 middle ">
-            <input type="text" class="form-control " name="contest" placeholder="比赛名称">
-        </div>
-        <div class="row col-sm-2 middle text-center" style="margin: 0 5px;">
-            <a class="btn btn-primary" id="edit_contest">修改比赛名称</a>
-        </div>
-        <div class="row col-sm-2 middle text-center middle" >
-            <label>
-                <input type="checkbox"  id='status' name="status">比赛状态
-            </label>
-        </div>
-    </div>
     <div style="padding: 20px 0;">
         <a class="btn btn-primary" id="addBtn">添加</a>
-        <a class="btn btn-danger">删除</a>
     </div>
  
     <div>
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>姓名</th>
-                <th>学号</th>
-                <th>性别</th>
-                <th>学院</th>
+                <th>编号</th>
+                <th>教师编号</th>
+                <th>教师姓名</th>
+                <th>开始时间</th>
+                <th>结束时间</th>
+                <th>课程日期</th>
                 <th>操作</th>
             </tr>
             </thead>
             <tbody id="tb">
-            {% for row in stu_list %}
-                <tr nid="{{ row.id }}">
-                    <td na="nid">{{ row.id }}</td>
-                    <td na="user">{{ row.name }}</td>
-                    <td na="stuid">{{ row.stuid }}</td>
-                    <td na="sex">{{ row.sex }}</td>
-                    <td na="department">{{ row.department }}</td>
+            {% for row in cou_list %}
+                <tr nid="{{ row.number }}">
+                    <td na="number">{{ row.number }}</td>
+                    <td na="tea_number">{{ row.tea_number }}</td>
+                    <td na="tea_name">{{ row.tea_name }}</td>
+                    <td na="sta_time">{{ row.sta_time }}</td>
+                    <td na="end_time">{{ row.end_time }}</td>
+                    <td na="date">{{ row.date }}</td>
                     <td>
                         <a class="glyphicon glyphicon-remove icon del-row"></a>
                         <a class="glyphicon glyphicon-edit icon edit-row "></a>
@@ -84,7 +46,7 @@
 <div class="modal fade "  id="delModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  >
     <div class="modal-dialog" style="width:400px;" role="document">
         <div class="alert alert-danger" role="alert">
-            <h3 class="text-center">删除学生信息？</h3>
+            <h3 class="text-center">删除课程信息？</h3>
             <input style="display: none;" type="text" id="delNid" />
             <div>
                 <button id="delCancel"type="button" class="btn btn-default " data-dismiss="modal">取消</button>
@@ -101,42 +63,46 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="myModalLabel">编辑学生</h4>
+                <h4 class="modal-title" id="myModalLabel">编辑课程</h4>
             </div>
             <div class="modal-body center">
             <form id="fm" class="form-horizontal ">
                 <input type="text" name="nid" style="display: none" />
 
                 <div class="form-group">
-                    <label for="username" class="col-sm-2 control-label">姓名</label>
+                    <label for="username" class="col-sm-2 control-label">编号</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="user" placeholder="姓名">
+                        <input type="text" class="form-control" name="number" placeholder="姓名">
                     </div>
                 </div>
-
                 <div class="form-group">
-                    <label for="stuid" class="col-sm-2 control-label">学号</label>
+                    <label for="stuid" class="col-sm-2 control-label">教室姓名</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="stuid" placeholder="学号">
+                        <input type="text" class="form-control" name="tea_name" placeholder="学号">
                     </div>
                 </div>
-
                 <div class="form-group">
-                    <label for="stuid" class="col-sm-2 control-label">性别</label>
+                    <label for="stuid" class="col-sm-2 control-label">教师编号</label>
                     <div class="col-sm-10">
-                        <label class="radio-inline">
-                            <input type="radio" name="sex" value="男"> 男
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio"  name="sex" value="女"> 女
-                        </label>
+                        <input type="text" class="form-control" name="tea_number" placeholder="学号">
                     </div>
                 </div>
-
                 <div class="form-group">
-                    <label for="stuid" class="col-sm-2 control-label">学院</label>
+                    <label for="stuid" class="col-sm-2 control-label">开始时间</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="department" placeholder="学院">
+                        <input type="text" class="form-control" name="sta_time" placeholder="学号">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="stuid" class="col-sm-2 control-label">结束时间</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="end_time" placeholder="学号">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="stuid" class="col-sm-2 control-label">日期</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="date" placeholder="学号">
                     </div>
                 </div>
             </form>
@@ -157,40 +123,45 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="myModalLabel">创建学生</h4>
+                <h4 class="modal-title" id="myModalLabel">添加课程</h4>
             </div>
             <div class="modal-body center">
  
                 <form id="fm" class="form-horizontal">
                     <div class="form-group">
-                        <label for="name" class="col-sm-2 control-label">姓名</label>
+                        <label for="username" class="col-sm-2 control-label">编号</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="name" placeholder="姓名">
-                        </div>
-                    </div>
- 
-                    <div class="form-group">
-                        <label for="name" class="col-sm-2 control-label">学号</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="stuid" placeholder="学号">
-                        </div>
-                    </div>
- 
-                    <div class="form-group">
-                        <label for="name" class="col-sm-2 control-label">性别</label>
-                        <div class="col-sm-10">
-                            <label class="radio-inline">
-                                <input type="radio" name="sex" value="男" checked> 男
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio"  name="sex" value="女"> 女
-                            </label>
+                            <input type="text" class="form-control" name="number" placeholder="姓名">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="name" class="col-sm-2 control-label">学院</label>
+                        <label for="stuid" class="col-sm-2 control-label">教室姓名</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="department" placeholder="学院">
+                            <input type="text" class="form-control" name="tea_name" placeholder="学号">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="stuid" class="col-sm-2 control-label">教师编号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="tea_number" placeholder="学号">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="stuid" class="col-sm-2 control-label">开始时间</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="sta_time" placeholder="学号">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="stuid" class="col-sm-2 control-label">结束时间</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="end_time" placeholder="学号">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="stuid" class="col-sm-2 control-label">日期</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="date" placeholder="学号">
                         </div>
                     </div>
                     
@@ -206,7 +177,6 @@
 </div>
  
 {% endblock %}
-
 {% block script %}
-    <script type="text/javascript" src="{% static 'js/detail.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/Course.js' %}"></script>
 {% endblock %}

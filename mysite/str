@@ -1,0 +1,448 @@
+-- MySQL dump 10.13  Distrib 5.6.46, for Linux (x86_64)
+--
+-- Host: localhost    Database: mysite
+-- ------------------------------------------------------
+-- Server version	5.6.46
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `Edu_classroom`
+--
+
+DROP TABLE IF EXISTS `Edu_classroom`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Edu_classroom` (
+  `number` int(11) NOT NULL,
+  `use_statime` int(11) NOT NULL,
+  `use_endtime` int(11) NOT NULL,
+  `use_course` int(11) NOT NULL,
+  `use_teacher` int(11) NOT NULL,
+  `use_date` varchar(200) NOT NULL,
+  PRIMARY KEY (`number`),
+  UNIQUE KEY `Edu_classroom_number_c7cf412e_uniq` (`number`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Edu_classroom`
+--
+
+LOCK TABLES `Edu_classroom` WRITE;
+/*!40000 ALTER TABLE `Edu_classroom` DISABLE KEYS */;
+INSERT INTO `Edu_classroom` VALUES (2,3,4,5,6,'2019-08-22');
+/*!40000 ALTER TABLE `Edu_classroom` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Edu_course`
+--
+
+DROP TABLE IF EXISTS `Edu_course`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Edu_course` (
+  `number` int(11) NOT NULL,
+  `tea_number` int(11) NOT NULL,
+  `tea_name` varchar(200) NOT NULL,
+  `sta_time` int(11) NOT NULL,
+  `end_time` int(11) NOT NULL,
+  `date` varchar(200) NOT NULL,
+  PRIMARY KEY (`number`),
+  UNIQUE KEY `Edu_course_number_78cdc0c1_uniq` (`number`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Edu_course`
+--
+
+LOCK TABLES `Edu_course` WRITE;
+/*!40000 ALTER TABLE `Edu_course` DISABLE KEYS */;
+INSERT INTO `Edu_course` VALUES (1,3,'2',5,5,'6');
+/*!40000 ALTER TABLE `Edu_course` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Edu_teacher`
+--
+
+DROP TABLE IF EXISTS `Edu_teacher`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Edu_teacher` (
+  `number` int(11) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `age` int(11) NOT NULL,
+  `sex` varchar(200) NOT NULL,
+  `department` varchar(200) NOT NULL,
+  PRIMARY KEY (`number`),
+  UNIQUE KEY `Edu_teacher_number_f90f1b3f_uniq` (`number`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Edu_teacher`
+--
+
+LOCK TABLES `Edu_teacher` WRITE;
+/*!40000 ALTER TABLE `Edu_teacher` DISABLE KEYS */;
+INSERT INTO `Edu_teacher` VALUES (2,'王睿',18,'男','滴滴打车学院'),(3,'王宁',18,'男','嘀嘀打车学院');
+/*!40000 ALTER TABLE `Edu_teacher` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_group`
+--
+
+DROP TABLE IF EXISTS `auth_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(80) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_group`
+--
+
+LOCK TABLES `auth_group` WRITE;
+/*!40000 ALTER TABLE `auth_group` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_group` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_group_permissions`
+--
+
+DROP TABLE IF EXISTS `auth_group_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_group_permissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_group_permissions_group_id_permission_id_0cd325b0_uniq` (`group_id`,`permission_id`),
+  KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`),
+  CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_group_permissions`
+--
+
+LOCK TABLES `auth_group_permissions` WRITE;
+/*!40000 ALTER TABLE `auth_group_permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_group_permissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_permission`
+--
+
+DROP TABLE IF EXISTS `auth_permission`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_permission` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `content_type_id` int(11) NOT NULL,
+  `codename` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
+  CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_permission`
+--
+
+LOCK TABLES `auth_permission` WRITE;
+/*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
+INSERT INTO `auth_permission` VALUES (1,'Can add log entry',1,'add_logentry'),(2,'Can change log entry',1,'change_logentry'),(3,'Can delete log entry',1,'delete_logentry'),(4,'Can add group',2,'add_group'),(5,'Can change group',2,'change_group'),(6,'Can delete group',2,'delete_group'),(7,'Can add permission',3,'add_permission'),(8,'Can change permission',3,'change_permission'),(9,'Can delete permission',3,'delete_permission'),(10,'Can add user',4,'add_user'),(11,'Can change user',4,'change_user'),(12,'Can delete user',4,'delete_user'),(13,'Can add content type',5,'add_contenttype'),(14,'Can change content type',5,'change_contenttype'),(15,'Can delete content type',5,'delete_contenttype'),(16,'Can add session',6,'add_session'),(17,'Can change session',6,'change_session'),(18,'Can delete session',6,'delete_session'),(19,'Can add choice',7,'add_choice'),(20,'Can change choice',7,'change_choice'),(21,'Can delete choice',7,'delete_choice'),(22,'Can add question',8,'add_question'),(23,'Can change question',8,'change_question'),(24,'Can delete question',8,'delete_question'),(25,'Can add 用户',9,'add_user'),(26,'Can change 用户',9,'change_user'),(27,'Can delete 用户',9,'delete_user'),(28,'Can add 管理员用户',10,'add_aduser'),(29,'Can change 管理员用户',10,'change_aduser'),(30,'Can delete 管理员用户',10,'delete_aduser'),(31,'Can add teacher',11,'add_teacher'),(32,'Can change teacher',11,'change_teacher'),(33,'Can delete teacher',11,'delete_teacher'),(34,'Can add course',12,'add_course'),(35,'Can change course',12,'change_course'),(36,'Can delete course',12,'delete_course'),(37,'Can add classroom',13,'add_classroom'),(38,'Can change classroom',13,'change_classroom'),(39,'Can delete classroom',13,'delete_classroom');
+/*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user`
+--
+
+DROP TABLE IF EXISTS `auth_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `password` varchar(128) NOT NULL,
+  `last_login` datetime(6) DEFAULT NULL,
+  `is_superuser` tinyint(1) NOT NULL,
+  `username` varchar(150) NOT NULL,
+  `first_name` varchar(30) NOT NULL,
+  `last_name` varchar(30) NOT NULL,
+  `email` varchar(254) NOT NULL,
+  `is_staff` tinyint(1) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `date_joined` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user`
+--
+
+LOCK TABLES `auth_user` WRITE;
+/*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$36000$L3aLhllLqH7X$I3xxtYteo8StYe62oPxw5DdOglkb/tTBQuutkXWBNLo=','2019-11-21 09:46:52.061561',1,'root','','','349652743@qq.com',1,1,'2019-11-19 05:56:22.171150');
+/*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user_groups`
+--
+
+DROP TABLE IF EXISTS `auth_user_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user_groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_user_groups_user_id_group_id_94350c0c_uniq` (`user_id`,`group_id`),
+  KEY `auth_user_groups_group_id_97559544_fk_auth_group_id` (`group_id`),
+  CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
+  CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user_groups`
+--
+
+LOCK TABLES `auth_user_groups` WRITE;
+/*!40000 ALTER TABLE `auth_user_groups` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_user_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user_user_permissions`
+--
+
+DROP TABLE IF EXISTS `auth_user_user_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user_user_permissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_user_user_permissions_user_id_permission_id_14a6b632_uniq` (`user_id`,`permission_id`),
+  KEY `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` (`permission_id`),
+  CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user_user_permissions`
+--
+
+LOCK TABLES `auth_user_user_permissions` WRITE;
+/*!40000 ALTER TABLE `auth_user_user_permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_user_user_permissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `custreg_aduser`
+--
+
+DROP TABLE IF EXISTS `custreg_aduser`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `custreg_aduser` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(128) NOT NULL,
+  `password` varchar(128) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `custreg_aduser`
+--
+
+LOCK TABLES `custreg_aduser` WRITE;
+/*!40000 ALTER TABLE `custreg_aduser` DISABLE KEYS */;
+INSERT INTO `custreg_aduser` VALUES (1,'root','custcust');
+/*!40000 ALTER TABLE `custreg_aduser` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `custreg_user`
+--
+
+DROP TABLE IF EXISTS `custreg_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `custreg_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) NOT NULL,
+  `stuid` varchar(256) NOT NULL,
+  `sex` varchar(32) NOT NULL,
+  `c_time` datetime(6) NOT NULL,
+  `department` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `custreg_user`
+--
+
+LOCK TABLES `custreg_user` WRITE;
+/*!40000 ALTER TABLE `custreg_user` DISABLE KEYS */;
+INSERT INTO `custreg_user` VALUES (11,'王宁宁','170511128','男','2019-11-19 06:06:24.274145','计算机科学技术学院'),(14,'王宁','170511130','男','2019-11-19 12:45:48.355803','计算机科学技术学院'),(17,'1','124','男','2019-11-19 12:47:48.155145','计算机科学技术学院'),(18,'王宁','112312312','男','2019-11-19 12:52:01.181167','滴滴打车学院'),(20,'123','123','男','2019-11-21 03:57:12.139937','计算机科学技术学院'),(22,'王睿','1705111288','男','2019-11-25 08:41:53.156087','计算机科学技术学院'),(28,'123','258','男','2019-11-26 03:30:53.647471','阿鲁');
+/*!40000 ALTER TABLE `custreg_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_admin_log`
+--
+
+DROP TABLE IF EXISTS `django_admin_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_admin_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `action_time` datetime(6) NOT NULL,
+  `object_id` longtext,
+  `object_repr` varchar(200) NOT NULL,
+  `action_flag` smallint(5) unsigned NOT NULL,
+  `change_message` longtext NOT NULL,
+  `content_type_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `django_admin_log_content_type_id_c4bce8eb_fk_django_co` (`content_type_id`),
+  KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`),
+  CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
+  CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_admin_log`
+--
+
+LOCK TABLES `django_admin_log` WRITE;
+/*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
+INSERT INTO `django_admin_log` VALUES (1,'2019-11-19 05:56:41.831387','1','123',3,'',9,1),(2,'2019-11-19 05:56:48.371995','2','123',3,'',9,1),(3,'2019-11-19 05:56:51.151043','3','567',3,'',9,1),(4,'2019-11-19 05:56:53.891528','4','123',3,'',9,1),(5,'2019-11-19 06:13:00.027877','5','王宁',3,'',9,1),(6,'2019-11-19 06:13:00.070376','6','王宁',3,'',9,1);
+/*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_content_type`
+--
+
+DROP TABLE IF EXISTS `django_content_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_content_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `app_label` varchar(100) NOT NULL,
+  `model` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_content_type`
+--
+
+LOCK TABLES `django_content_type` WRITE;
+/*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
+INSERT INTO `django_content_type` VALUES (1,'admin','logentry'),(2,'auth','group'),(3,'auth','permission'),(4,'auth','user'),(5,'contenttypes','contenttype'),(10,'custreg','aduser'),(9,'custreg','user'),(13,'Edu','classroom'),(12,'Edu','course'),(11,'Edu','teacher'),(7,'polls','choice'),(8,'polls','question'),(6,'sessions','session');
+/*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_migrations`
+--
+
+DROP TABLE IF EXISTS `django_migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_migrations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `app` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `applied` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_migrations`
+--
+
+LOCK TABLES `django_migrations` WRITE;
+/*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2019-11-19 05:48:28.965252'),(2,'auth','0001_initial','2019-11-19 05:48:29.492431'),(3,'admin','0001_initial','2019-11-19 05:48:29.610497'),(4,'admin','0002_logentry_remove_auto_add','2019-11-19 05:48:29.631364'),(5,'contenttypes','0002_remove_content_type_name','2019-11-19 05:48:29.721833'),(6,'auth','0002_alter_permission_name_max_length','2019-11-19 05:48:29.769175'),(7,'auth','0003_alter_user_email_max_length','2019-11-19 05:48:29.822709'),(8,'auth','0004_alter_user_username_opts','2019-11-19 05:48:29.844276'),(9,'auth','0005_alter_user_last_login_null','2019-11-19 05:48:29.886135'),(10,'auth','0006_require_contenttypes_0002','2019-11-19 05:48:29.890500'),(11,'auth','0007_alter_validators_add_error_messages','2019-11-19 05:48:29.903790'),(12,'auth','0008_alter_user_username_max_length','2019-11-19 05:48:29.955386'),(13,'custreg','0001_initial','2019-11-19 05:48:29.980909'),(14,'custreg','0002_auto_20191119_0928','2019-11-19 05:48:30.019180'),(16,'sessions','0001_initial','2019-11-19 05:48:30.230816'),(17,'custreg','0003_aduser','2019-11-21 04:14:50.364452'),(18,'Edu','0001_initial','2019-12-28 14:04:06.080738'),(19,'Edu','0002_auto_20191228_2317','2019-12-28 15:17:06.156002'),(20,'Edu','0003_auto_20191228_2330','2019-12-28 15:30:32.687885'),(21,'Edu','0004_auto_20191229_1117','2019-12-29 03:17:35.977803');
+/*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_session`
+--
+
+DROP TABLE IF EXISTS `django_session`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_session` (
+  `session_key` varchar(40) NOT NULL,
+  `session_data` longtext NOT NULL,
+  `expire_date` datetime(6) NOT NULL,
+  PRIMARY KEY (`session_key`),
+  KEY `django_session_expire_date_a5c62663` (`expire_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_session`
+--
+
+LOCK TABLES `django_session` WRITE;
+/*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
+INSERT INTO `django_session` VALUES ('3jxlb9unbk5uj2j7s0znkwrm78obefm6','YzYzNjkwYzBlNGYxZDBmZjNlMGFlMDhkZjhlYmY5OTdjMjA2MDdmNzp7Il9zZXNzaW9uX2V4cGlyeSI6MCwiaXNfbG9naW4iOnRydWV9','2019-12-10 03:36:30.816736'),('4ha5k4m5knf6vqqbzbkrva0vwclje9d5','YzYzNjkwYzBlNGYxZDBmZjNlMGFlMDhkZjhlYmY5OTdjMjA2MDdmNzp7Il9zZXNzaW9uX2V4cGlyeSI6MCwiaXNfbG9naW4iOnRydWV9','2019-12-09 13:50:03.540324'),('6zi7phcu0ajmllbotcg0hzba7q9z0v4d','YzYzNjkwYzBlNGYxZDBmZjNlMGFlMDhkZjhlYmY5OTdjMjA2MDdmNzp7Il9zZXNzaW9uX2V4cGlyeSI6MCwiaXNfbG9naW4iOnRydWV9','2019-12-08 04:12:58.874812'),('a059qeficdn7u52ckrta89arir400pnd','NTE4YmI5MjgwZmU4YTk4ZjNlMzBkY2E4MTg3YTQzZDliNzY5YjNjNjp7ImlzX2xvZ2luIjp0cnVlLCJfc2Vzc2lvbl9leHBpcnkiOjB9','2019-12-07 13:16:44.124452'),('bvp6nf6pv6og3sabhtho1zm18u21kcjx','YzYzNjkwYzBlNGYxZDBmZjNlMGFlMDhkZjhlYmY5OTdjMjA2MDdmNzp7Il9zZXNzaW9uX2V4cGlyeSI6MCwiaXNfbG9naW4iOnRydWV9','2020-01-05 07:59:17.214087'),('frou8riwe3edy49y0kfl2i0evxcvj042','YzYxYTk1MzNhYWNkMjkwNGU5NzdiN2JlZGYwMGIzMGUyNTU4ZDlhYTp7Il9zZXNzaW9uX2V4cGlyeSI6MCwiaXNfbG9naW4iOnRydWUsIl9hdXRoX3VzZXJfaGFzaCI6IjAwMGIyMDVhYmFiMDVlODgxNjgzOGIwMjI3NjA1NWQwZmZiNjYxYTYiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=','2019-12-05 09:53:35.722058'),('h07652p7o1z4qji01elywugvn1r7jhj8','YzYzNjkwYzBlNGYxZDBmZjNlMGFlMDhkZjhlYmY5OTdjMjA2MDdmNzp7Il9zZXNzaW9uX2V4cGlyeSI6MCwiaXNfbG9naW4iOnRydWV9','2019-12-05 08:32:06.434457'),('hgl8aib8dz18wb0it3ncsjqzp0q1onoi','NzViNWMwZjYwNTUxMjhiMzU2OTM3OTlkMGY1MGIwMDA3MDBhMmI2ZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJJU19sb2dpbiI6dHJ1ZSwiX3Nlc3Npb25fZXhwaXJ5IjowLCJfYXV0aF91c2VyX2hhc2giOiIwMDBiMjA1YWJhYjA1ZTg4MTY4MzhiMDIyNzYwNTVkMGZmYjY2MWE2IiwiaXNfbG9naW4iOnRydWV9','2019-12-05 07:27:34.157347'),('m1db42u4c5faw9zp87viv6g390c03yba','NTE4YmI5MjgwZmU4YTk4ZjNlMzBkY2E4MTg3YTQzZDliNzY5YjNjNjp7ImlzX2xvZ2luIjp0cnVlLCJfc2Vzc2lvbl9leHBpcnkiOjB9','2019-12-08 16:35:45.716468'),('nlci38h9iud8b1jto49eun1ntyu2ufam','YzYzNjkwYzBlNGYxZDBmZjNlMGFlMDhkZjhlYmY5OTdjMjA2MDdmNzp7Il9zZXNzaW9uX2V4cGlyeSI6MCwiaXNfbG9naW4iOnRydWV9','2019-12-05 07:27:56.169369'),('pfdbokkvzro6yp1ddr7xfuerzyf44nho','NTE4YmI5MjgwZmU4YTk4ZjNlMzBkY2E4MTg3YTQzZDliNzY5YjNjNjp7ImlzX2xvZ2luIjp0cnVlLCJfc2Vzc2lvbl9leHBpcnkiOjB9','2019-12-06 10:35:54.274318'),('rgm0sxoufr5oi5rk5khi1z1afvws71jb','YzYzNjkwYzBlNGYxZDBmZjNlMGFlMDhkZjhlYmY5OTdjMjA2MDdmNzp7Il9zZXNzaW9uX2V4cGlyeSI6MCwiaXNfbG9naW4iOnRydWV9','2019-12-09 10:01:35.493330'),('x7k61hxs850i9kho99zncpgvdk9k89w2','YzYzNjkwYzBlNGYxZDBmZjNlMGFlMDhkZjhlYmY5OTdjMjA2MDdmNzp7Il9zZXNzaW9uX2V4cGlyeSI6MCwiaXNfbG9naW4iOnRydWV9','2019-12-08 16:39:41.116444'),('y8hcmrz614rf7xm4x3pl6gvvt36cfxjs','YzYzNjkwYzBlNGYxZDBmZjNlMGFlMDhkZjhlYmY5OTdjMjA2MDdmNzp7Il9zZXNzaW9uX2V4cGlyeSI6MCwiaXNfbG9naW4iOnRydWV9','2019-12-08 15:45:45.348555');
+/*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2019-12-29 15:44:15
