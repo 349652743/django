@@ -1,0 +1,80 @@
+{% extends "question_base.html" %}
+{% load staticfiles %}
+{% block title %}主页{% endblock %}
+{% block css %}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <a href="/question/detail">经典模式</a>
+    <a href="/question/detail/0">错题模式</a>
+    <a href="/question/detail/1">错题本</a>
+    <a href="/question/logout/">注销</a>
+    <hr>
+    {% for item in  question_list %}
+        <div class="radio" nid={{ item.id }} type={{ item.question_type }} answer={{ item.answer }} title={{item.title}}>
+            <h4 class="title">{{item.id}}.{{ item.title }}</h4>
+            <label>
+                <input type="radio" name="{{item.id}}Radios" id="optionsRadios1" value="option0" checked>{{ item.option1}}
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="{{item.id}}Radios" id="optionsRadios2" value="option1">{{ item.option2 }}
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="{{item.id}}Radios" id="optionsRadios3" value="option2">{{ item.option3 }}
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="{{item.id}}Radios" id="optionsRadios4" value="option3">{{ item.option4 }}
+            </label>
+            <br>
+            <button type="button" class="btn btn-default" id="see_answer">查看答案</button>
+            <button type="button" class="btn btn-default" id="add_wrong">加入错题本</button>
+            <button type="button" class="btn btn-default" id="erase_wrong">从错题本中删除</button>
+        </div>
+    <hr>
+    {% endfor %}
+    {% for item in  mul_question_list %}
+        <div class="checkbox" nid={{ item.id }} type={{ item.question_type }} answer={{ item.answer }} title={{item.title}}>
+            <h4 class="title">{{item.id}}.{{ item.title }}</h4>
+            <label><input type="checkbox" name="{{item.id}}checkbox" value="option0">{{ item.option1}}</label>
+            <br>
+            <label><input type="checkbox" name="{{item.id}}checkbox" value="option1">{{ item.option2 }}</label>
+            <br>
+            <label><input type="checkbox" name="{{item.id}}checkbox" value="option2">{{ item.option3 }}</label>
+            <br>
+            <label><input type="checkbox" name="{{item.id}}checkbox" value="option3">{{ item.option4 }}</label>
+            <br>
+            <button type="button" class="btn btn-default" id="see_answer">查看答案</button>
+            <button type="button" class="btn btn-default" id="add_wrong">加入错题本</button>
+            <button type="button" class="btn btn-default" id="erase_wrong">从错题本中删除</button>
+            <br>
+        </div>
+    <hr>
+    {% endfor %}
+    {% for item in tf_question_list %}
+        <div class="radio" nid={{ item.id }} type={{ item.question_type }} answer={{ item.answer }} title={{item.title}}>
+            <h4 class="title">{{item.id}}.{{ item.title }}</h4>
+            <label>
+                <input type="radio" name="{{ item.id }}Radios" id="optionsRadios1" value="option1" checked>{{ item.option1}}
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="{{ item.id }}Radios" id="optionsRadios2" value="option0">{{ item.option2 }}
+            </label>
+            <br>
+            <button type="button" class="btn btn-default" id="see_answer">查看答案</button>
+            <button type="button" class="btn btn-default" id="add_wrong">加入错题本</button>
+            <button type="button" class="btn btn-default" id="erase_wrong">从错题本中删除</button>
+        </div>
+    <hr>
+    {% endfor %}
+    <button type="button" class="btn btn-default" id="submit">提交</button>
+    <button type="button" class="btn btn-default" id="reload">重置</button>
+</div>
+
+{% endblock %}
+{% block script %}
+<script src = "{% static '/js/detail.js' %}"></script>
+{% endblock %}

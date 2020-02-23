@@ -71,7 +71,7 @@ $('#select').click(function () {
             }
         })
     }else{
-        $("#newdiv").empty();
+        $("#newDiv").empty();
         var html = '<table class="table table-bordered table-striped">'+
                         '<tr id="tr_id">'+
                             '<th>教室编号</th>'+

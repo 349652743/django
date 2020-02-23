@@ -8,7 +8,7 @@ class User (models.Model):
     sex = models.CharField(max_length=32)
     department = models.CharField(max_length=32)
     c_time = models.DateTimeField(auto_now_add=True)
-  
+    conNum = models.IntegerField(default = 0)
     def __str__(self):
         return self.name
     class Meta:
@@ -25,4 +25,11 @@ class aduser (models.Model):
         ordering = ['username']
         verbose_name = '管理员用户'
         verbose_name_plural = '管理员用户'
+class contest (models.Model):
+    name = models.CharField(max_length = 128)
+    endTime = models.DateTimeField()
+    endReg = models.BooleanField()
+    c_time = models.DateTimeField(auto_now_add = True)
+    class Meta:
+        ordering = ['c_time']
 # Create your models here.

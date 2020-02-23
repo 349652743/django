@@ -1,111 +1,123 @@
-$('#delConfirm').click(function () {//删除确认
-    var rowId = $('#delNid').val();
-    console.log(rowId);
+$('.radio').on('click','#see_answer',function(){
+    console.log($(this).siblings('.title').text());
+    $(this).siblings('.title').text($(this).parent().attr('nid')+'.'+$(this).parent().attr('title')+'答案：'+$(this).parent().attr('answer'));
+});
+$('.radio').on('click','#add_wrong',function(){
+    var data ={};
+    data['title']=[];
+    data['title'].push($(this).parent().attr('title'));
+    console.log(data['title']);
     $.ajax({
-        url: "/custreg/del_user/",
+        url: '/question/add_wrong/',
         type: 'POST',
-        data: {'userid': rowId},
-        success:function (data) {
-            if(data['status']){
-                $('tr[nid="'+ rowId+'"]').remove();
-            }
-            $('#delModal').modal('hide');
-        }
-    })
-        
-});
-$('#tb').on('click','.del-row',function(){//删除按钮
-    $('#delModal').modal('show');
-    var rowid = $(this).parent().parent().attr('nid');
-    $('#delNid').val(rowid);
-});
-
-$('#tb').on('click','.edit-row',function () {//编辑按钮
-    $('#eidtModal').modal('show');
-    //1.获取当前行的所有数据
-    // 将数据赋值到对应的对话框的指定位置
-    $(this).parent().prevAll().each(function () {
-
-        var v = $(this).text();
-        var n = $(this).attr('na');
-    if(n=='department'){
-        $("#eidtModal input[name='"+ n +"']").val(v)
-    }else if(n=='sex'){
-        // v=''
-        if(v=='男'){
-            $('#eidtModal :radio[value="男"]').prop('checked',true);
-        }else{
-            $('#eidtModal :radio[value="女"]').prop('checked',true);
-        }
-    }else {
-        // n=stuid
-        // v=170511128
-        $("#eidtModal input[name='"+ n +"']").val(v)
-    }
-    });
-});
-$('#btnEditSave').click(function () {//编辑确认
-    var postData = {};
-    $('#eidtModal').find('input,select').each(function () {
-        var v = $(this).val();
-        var n = $(this).attr('name');
-        if(n=='sex'){
-            if($(this).prop('checked')){
-                postData[n] = v;
-            }
-        }else{
-            postData[n] = v;
-        }
-    });
-
-    $.ajax({
-        url: '/custreg/edit_user/',
-        type: 'POST',
-        data: postData,
-        dataType: 'JSON',
-        success:function (data) {
-            if(data['status']){
-                alert('修改成功');
-                window.location.reload();
-            }else{
-                alert('修改失败');
-            }
-        }
-    });
-});
-
-$('#addBtn').click(function () {//添加按钮
-    $('#addModal').modal('show');
-});
-$('#btnSave').click(function () {//添加确认
-    var postData = {};
-    $('#addModal').find('input,select').each(function () {
-        var v = $(this).val();
-        var n = $(this).attr('name');
-        if(n=='sex'){
-            if($(this).prop('checked')){
-                postData[n] = v;
-            }
-        }else{
-            postData[n] = v;
-        }
-    });
-    //console.log(postData);
-    $.ajax({
-        url: '/custreg/add_user/',
-        type: 'POST',
-        data: postData,
+        data: data,
+        traditional:true,
         dataType: 'JSON',
         success:function (data) {
             if(data['message']=='添加成功'){
                 alert(data['message']);
-                window.location.reload();
-            }else if(data['message']=='用户已注册,请勿重复添加'){
-                alert(data['message']);
-            }else{
+            }
+        }
+    });
+});
+$('.radio').on('click','#erase_wrong',function(){
+    var data ={};
+    data['title']=[];
+    data['title'].push($(this).parent().attr('title'));
+    console.log(data['title']);
+    $.ajax({
+        url: '/question/erase_wrong/',
+        type: 'POST',
+        data: data,
+        traditional:true,
+        dataType: 'JSON',
+        success:function (data) {
+            if(data['message']=='删除成功'){
                 alert(data['message']);
             }
         }
     });
-
+});
+$('.checkbox').on('click','#see_answer',function(){
+    console.log($(this).parent().attr('answer'));
+    $(this).siblings('.title').text($(this).parent().attr('nid')+'.'+$(this).parent().attr('title')+'答案：'+$(this).parent().attr('answer'));
+});
+$('.checkbox').on('click','#add_wrong',function(){
+    var data ={};
+    data['title']=[];
+    data['title'].push($(this).parent().attr('title'));
+    console.log(data['title']);
+    $.ajax({
+        url: '/question/add_wrong/',
+        type: 'POST',
+        data: data,
+        traditional:true,
+        dataType: 'JSON',
+        success:function (data) {
+            if(data['message']=='添加成功'){
+                alert(data['message']);
+            }
+        }
+    });
+});
+$('.checkbox').on('click','#erase_wrong',function(){
+    var data ={};
+    data['title']=[];
+    data['title'].push($(this).parent().attr('title'));
+    console.log(data['title']);
+    $.ajax({
+        url: '/question/erase_wrong/',
+        type: 'POST',
+        data: data,
+        traditional:true,
+        dataType: 'JSON',
+        success:function (data) {
+            if(data['message']=='删除成功'){
+                alert(data['message']);
+            }
+        }
+    });
+});
+$('#submit').click(function(){
+    var score=0;
+    $('.radio').each(function(){
+        var answer = $(this).attr('answer');
+        var choice = $("input[name="+$(this).attr('nid')+"Radios]:checked").val();
+        $(this).find('.title').text($(this).attr('nid')+'.'+$(this).attr('title')+'答案：'+$(this).attr('answer'));
+        // console.log('option'+answer);
+        // console.log(choice);
+        if('option'+answer==choice){
+            score+=1;
+        }else {
+            $(this).find('.title').css("color","red");
+        }
+    });
+    $('.checkbox').each(function(){
+        var chk_value = [];//定义一个数组    
+        $('input[name='+$(this).attr('nid')+'checkbox]:checked').each(function(){//遍历每一个名字为interest的复选框，其中选中的执行函数    
+            chk_value.push($(this).val());//将选中的值添加到数组chk_value中    
+        });
+        $(this).find('.title').text($(this).attr('nid')+'.'+$(this).attr('title')+'答案：'+$(this).attr('answer'));
+        // console.log($(this).attr('answer'));
+        var str = $(this).attr('answer');
+        if(str!=undefined)
+        var ans_value = str.split(',');
+        console.log(ans_value);
+        console.log(chk_value);
+        var flag=1;
+        for(var i=0;i<ans_value.length;i++){
+            if('option'+ans_value[i]!=chk_value[i])flag=0;
+            console.log('option'+ans_value[i]);
+            console.log(chk_value[i]);
+        }
+        if(flag==0||ans_value.length!=chk_value.length){
+            $(this).find('.title').css("color","red");
+        }else {
+            score+=1;
+        }
+    });
+    alert('总分:'+score);
+});
+$('#reload').click(function(){
+    window.location.reload();
 });

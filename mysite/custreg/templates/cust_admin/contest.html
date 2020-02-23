@@ -28,46 +28,32 @@
 
 {% block content %}
 <div class="container">
-    <div class="row">
-        <div class="row col-sm-2 middle">
-            <label class="control-label "><h3>&nbsp&nbsp比赛名称:</h3></label>
-        </div>
-        <div class= "col-sm-3 middle">
-            <select class="selectpicker show-tick form-control " id="contest">
-                {% for con in con_list %}
-                <option>{{ con.id }}:{{con.name}}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="row col-sm-2 middle text-center" style="margin: 0 5px;">
-            <a class="btn btn-primary" id="btnSelect">查询</a>
-        </div>
-    </div>
+    
     <div style="padding: 20px 0;">
-        <a class="btn btn-primary" id="addBtn">添加</a>
-        <a class="btn btn-danger">删除</a>
+        <a class="btn btn-primary" id="addBtn">添加比赛</a>
     </div>
- 
-    <div id='newDiv'>
-        <table class="table table-bordered table-striped" >
+    <div>
+        <table class="table table-hover">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>姓名</th>
-                <th>学号</th>
-                <th>性别</th>
-                <th>学院</th>
+                <th>比赛ID</th>
+                <th>名称</th>
+                <th>结束时间</th>
+                <th>开启注册</th>
                 <th>操作</th>
             </tr>
             </thead>
             <tbody id="tb">
-            {% for row in stu_list %}
+            {% for row in con_list %}
                 <tr nid="{{ row.id }}">
                     <td na="nid">{{ row.id }}</td>
-                    <td na="user">{{ row.name }}</td>
-                    <td na="stuid">{{ row.stuid }}</td>
-                    <td na="sex">{{ row.sex }}</td>
-                    <td na="department">{{ row.department }}</td>
+                    <td na="name"><a href="/custreg/{{row.id}}/">{{ row.name }}</a></td>
+                    <td na="endTime">{{ row.endTime }}</td>
+                    <td>
+                        <a class ='Reg-row'>
+                        <input type="checkbox" name="endReg" id="endReg" value="endReg" {% if row.endReg == True %}checked {% else %}unchecked{% endif %}> 
+                        </a>
+                    </td>
                     <td>
                         <a class="glyphicon glyphicon-remove icon del-row"></a>
                         <a class="glyphicon glyphicon-edit icon edit-row "></a>
@@ -83,7 +69,7 @@
 <div class="modal fade "  id="delModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  >
     <div class="modal-dialog" style="width:400px;" role="document">
         <div class="alert alert-danger" role="alert">
-            <h3 class="text-center">删除学生信息？</h3>
+            <h3 class="text-center">删除比赛信息？</h3>
             <input style="display: none;" type="text" id="delNid" />
             <div>
                 <button id="delCancel"type="button" class="btn btn-default " data-dismiss="modal">取消</button>
@@ -100,44 +86,26 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="myModalLabel">编辑学生</h4>
+                <h4 class="modal-title" id="myModalLabel">编辑比赛</h4>
             </div>
             <div class="modal-body center">
             <form id="fm" class="form-horizontal ">
                 <input type="text" name="nid" style="display: none" />
-
+                
                 <div class="form-group">
-                    <label for="username" class="col-sm-2 control-label">姓名</label>
+                    <label for="username" class="col-sm-2 control-label">比赛名称</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="user" placeholder="姓名">
+                        <input type="text" class="form-control" name="name" placeholder="比赛名称">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="stuid" class="col-sm-2 control-label">学号</label>
+                    <label for="stuid" class="col-sm-2 control-label">结束时间</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="stuid" placeholder="学号">
+                        <input type="text" class="form-control" name="endTime" placeholder="1999-08-22 19:00:00">
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="stuid" class="col-sm-2 control-label">性别</label>
-                    <div class="col-sm-10">
-                        <label class="radio-inline">
-                            <input type="radio" name="sex" value="男"> 男
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio"  name="sex" value="女"> 女
-                        </label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="stuid" class="col-sm-2 control-label">学院</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="department" placeholder="学院">
-                    </div>
-                </div>
             </form>
             </div>
             <div class="modal-footer">
@@ -156,43 +124,24 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="myModalLabel">创建学生</h4>
+                <h4 class="modal-title" id="myModalLabel">创建比赛</h4>
             </div>
             <div class="modal-body center">
- 
+
                 <form id="fm" class="form-horizontal">
                     <div class="form-group">
-                        <label for="name" class="col-sm-2 control-label">姓名</label>
+                        <label for="name" class="col-sm-2 control-label">名称</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="name" placeholder="姓名">
                         </div>
                     </div>
  
                     <div class="form-group">
-                        <label for="name" class="col-sm-2 control-label">学号</label>
+                        <label for="name" class="col-sm-2 control-label">结束时间</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="stuid" placeholder="学号">
+                            <input type="text" class="form-control" name="endTime" placeholder="1999-08-22 19:00:00">
                         </div>
                     </div>
- 
-                    <div class="form-group">
-                        <label for="name" class="col-sm-2 control-label">性别</label>
-                        <div class="col-sm-10">
-                            <label class="radio-inline">
-                                <input type="radio" name="sex" value="男" checked> 男
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio"  name="sex" value="女"> 女
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="name" class="col-sm-2 control-label">学院</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="department" placeholder="学院">
-                        </div>
-                    </div>
-                    
                 </form>
             </div>
             <div class="modal-footer">
@@ -207,5 +156,5 @@
 {% endblock %}
 
 {% block script %}
-    <script type="text/javascript" src="{% static 'js/detail.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/contest.js' %}"></script>
 {% endblock %}
